@@ -130,7 +130,6 @@ namespace lesson3
             Console.WriteLine("\nМассив после сортировки:");
             Print(a);
             Console.WriteLine($"\nКол-во операций:{count} Время в миллисекундах:{stopwatch.ElapsedMilliseconds}");
-
             Console.ReadKey();
 
 
