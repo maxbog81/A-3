@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 //Богатов Максим
-//1.Попробовать оптимизировать пузырьковую сортировку.Сравнить количество операций сравнения оптимизированной и неоптимизированной программы.
-//Написать функции сортировки, которые возвращают количество операций.
 
 namespace lesson3
 {
@@ -95,6 +93,26 @@ namespace lesson3
             return count;
         }
 
+        //Бинарный алгоритм поиска
+        static int InterpolationSearch(int[] a, int value)
+        {
+            int min = 0;
+            int max = a.Length - 1;
+            while (min <= max)
+            {
+                // Находим разделяющий элемент
+                int mid = min + (max - min) * (value - a[min]) / (a[max] - a[min]);
+                if (a[mid] == value)
+                    return mid;
+                else if (a[mid] < value)
+                    min = mid + 1;
+                else if (a[mid] > value)
+                    max = mid - 1;
+            }
+            return -1;   // Элемент не найден
+        }
+
+
         static void Print(int[] myarray)
         {
             foreach (int el in myarray)
@@ -106,7 +124,8 @@ namespace lesson3
         {
             //1.Попробовать оптимизировать пузырьковую сортировку.Сравнить количество операций сравнения оптимизированной и неоптимизированной программы.
             //Написать функции сортировки, которые возвращают количество операций.
-            int[] a= MyArray(10, 0, 100);
+            int n = 10; //размер массива
+            int[] a= MyArray(n, 0, 100);
             long count = 0;
             Console.WriteLine("Сортировка пузырьком\n");
             Console.WriteLine("Массив до сортировки:");
@@ -120,7 +139,7 @@ namespace lesson3
             Console.WriteLine($"\nКол-во операций:{count} Время в миллисекундах:{stopwatch.ElapsedMilliseconds}");
 
             //2. *Реализовать шейкерную сортировку.
-            a = MyArray(10, 0, 100);
+            a = MyArray(n, 0, 100);
             Console.WriteLine("\nШейкерная сортировка\n");
             Console.WriteLine("Массив до сортировки:");
             Print(a);
@@ -130,6 +149,12 @@ namespace lesson3
             Console.WriteLine("\nМассив после сортировки:");
             Print(a);
             Console.WriteLine($"\nКол-во операций:{count} Время в миллисекундах:{stopwatch.ElapsedMilliseconds}");
+
+            //3. Реализовать бинарный алгоритм поиска в виде функции, которой передаётся отсортированный массив. Функция возвращает индекс найденного элемента или –1, если элемент не найден.
+            Console.WriteLine("\nВвидите число для поиска:");
+            int k = int.Parse(Console.ReadLine());
+            Console.WriteLine("\nИндекс найденного элемента:{0}", InterpolationSearch(a, k));
+
             Console.ReadKey();
 
 
