@@ -42,9 +42,11 @@ namespace lesson3
         //  Сортируем методом пузырька
         static long BubbleSort(int[] myarray)
         {
+            int f = 0;
             long count = 0;
             for (int i = 0; i < myarray.Length; i++)
             {
+                f = 0;
                 count++;
                 for (int j = 0; j < myarray.Length - 1; j++)
                     if (myarray[j] > myarray[j + 1])//Сравниваем соседние элементы
@@ -53,10 +55,12 @@ namespace lesson3
                         //int t = a[j];
                         //a[j] = a[j + 1];
                         //a[j + 1] = t;
+                        f = 1;
                         swap(ref myarray[j], ref myarray[j + 1]);
                         count++;
 
                     }
+                if (f == 0) break; //оптимизировали пузырьковую сортировку Если сортировать нечего 
             }
             return count;
         }
@@ -112,7 +116,6 @@ namespace lesson3
             return -1;   // Элемент не найден
         }
 
-
         static void Print(int[] myarray)
         {
             foreach (int el in myarray)
@@ -156,8 +159,6 @@ namespace lesson3
             Console.WriteLine("\nИндекс найденного элемента:{0}", InterpolationSearch(a, k));
 
             Console.ReadKey();
-
-
 
         }
     }
